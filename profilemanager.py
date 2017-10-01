@@ -76,18 +76,6 @@ class Profile:
                     print('Your username is not valid')
 
     def view_fiends(self):
-
-        # file_exist = os.path.isfile('friends.csv')
-        # with open('friends.csv', 'a') as file:
-        #     fieldname = ['username', 'friendlist']
-        #     writer = csv.DictWriter(file, fieldnames=fieldname)
-        #
-        #     if not file_exist:
-        #         writer.writeheader()
-        #     writer.writerow({'username': 'endy',
-        #                      'friendlist': ['Kweku', 'Andrew']})
-        #     print('Your friends have been added')
-
         with open('friends.csv', 'r') as file:
             reader = csv.DictReader(file)
             uname = input("What\'s your username: ")
