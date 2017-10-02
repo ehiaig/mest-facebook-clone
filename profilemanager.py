@@ -6,17 +6,6 @@ class Profile:
     def __init__(self):
         pass
 
-    def create_profile(self, profle):
-        file_exist = os.path.isfile('profile.csv')
-        with open('profile.csv', 'a') as file:
-            fieldname= ['first name', 'last name', 'password', 'username', 'bio', 'date_of_birth']
-            writer = csv.DictWriter(file, fieldnames=fieldname)
-
-            if not file_exist:
-                writer.writeheader()
-            writer.writerow({'first name':profle.firstname, 'last name':profle.lastname, 'username':profle.username, 'bio':profle.bio, 'date_of_birth':profle.date_of_birth} )
-            print('Your profile has been created')
-
     def update_bio(self):
         with open('profile.csv', 'r') as file:
             nw_user = input('Supply username: ')
@@ -82,39 +71,22 @@ class Profile:
             for fr in reader:
                 if fr['username'] == uname:
                     print('Your friends are: '+ fr['friendlist'])
-        pass
-
-class Profile_input:
-    def __init__(self, firstname='', lastname='' ):
-        self.firstname = input('supply first name:')
-        self.lastname = input('supply last name:')
-        self.password = input('supply password:')
-        self.username = input('supply username:')
-        self.bio = input('Write a short bio:')
-        self.date_of_birth = input('supply date of birth:')
-
 def logic():
     while True:
         pf = Profile()
-        request = input(" 1. to Create profles \n 2. to Update Bio \n 3. to view posts \n 4. to Update photo \n 5. to view friends \n 6. to quit")
+        request = input(" 1. to Update Bio \n 2. to view posts \n 3. to Set profile or background photo \n 4. to view friends \n 5. to exit app")
         if request == '1':
-            pi = Profile_input()
-            pf.create_profile(pi)
-
-        elif request == '2':
             pf.update_bio()
-
-        elif request== '3':
+        elif request == '2':
             pf.view_posts()
 
-        elif request== '4':
+        elif request== '3':
             pf.set_photo()
 
-        elif request == '5':
-            # pi = Profile_input()
+        elif request== '4':
             pf.view_fiends()
 
-        elif request == '6':
+        elif request == '5':
             return False
 
 logic()
