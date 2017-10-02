@@ -12,7 +12,6 @@ class Profile:
             reader = csv.DictReader(file)
             for pr in reader:
                 if pr['username'] == nw_user:
-                    # print(pr)
                     choice = input(' a to update first name\n b to update last name \n c to update bio d. update date of birth\n e to update password').lower()
                     if choice == 'a':
                         new_firstname = input('Supply new first name: ')
