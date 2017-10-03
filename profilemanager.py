@@ -34,16 +34,41 @@ class Profile:
                         pr['password'] = new_password
                         print('Password changed successfully')
                 else:
-                    print('That username does not exist in our record ')
+                    print('That username does not exist in our record')
+
+    def create_post(self):
+        uname = input('What\'s your username: ')
+        with open('posts.csv', 'r') as file:
+            reader = csv.DictReader(file)
+            for r in reader:
+                if r['username'] == uname:
+                    print('M')
+                else:
+                    print('You are not a regisetred user')
+
+        file_exist = os.path.isfile('posts.csv')
+        with open('posts.csv', 'a') as file:
+
+            fieldname = ['username', 'post']
+            writer = csv.DictWriter(file, fieldnames=fieldname)
+
+            if not file_exist:
+                writer.writeheader()
+            writer.writerow({'username': 'ehi', 'post': 'My second post'})
+            print("Post has been created")
 
     def view_posts(self):
         with open("posts.csv", 'r') as file:
+            uname = input("What\'s your username: ")
             reader = csv.DictReader(file)
             for ps in reader:
-                if ps['username'] in ps['posts']:
-                    print(ps['posts'])
+                if ps['username'] == uname:
+                    if ps['username'] in ps['posts']:
+                        print(ps['posts'])
+                    else:
+                        print('This user has no posts')
                 else:
-                    print('This user has no posts')
+                    print("That username does not exist in our record")
 
     def set_photo(self):
         with open('media/photo.csv', 'wb') as file:
@@ -73,19 +98,23 @@ class Profile:
 def logic():
     while True:
         pf = Profile()
-        request = input(" 1. to Update Bio \n 2. to view posts \n 3. to Set profile or background photo \n 4. to view friends \n 5. to exit app")
+        request = input(" 1. to Update Bio \n 2. to create post \n 3. to view posts \n 4. to Set profile or background photo \n 5. to view friends \n 6. to exit app")
         if request == '1':
             pf.update_bio()
+
         elif request == '2':
+            pf.create_post()
+
+        elif request == '3':
             pf.view_posts()
 
-        elif request== '3':
+        elif request== '4':
             pf.set_photo()
 
-        elif request== '4':
+        elif request== '5':
             pf.view_fiends()
 
-        elif request == '5':
+        elif request == '6':
             return False
 
 logic()
